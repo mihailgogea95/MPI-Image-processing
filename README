@@ -14,7 +14,9 @@ Pentru a se vedea rezultatul , urmati pasii:
 	II. mpirun -np 12 ./filtru topologie.in imagini.in statistica.out
 
 	Numarul 12 deoarece sunt 12 procese in topologia din fisierul topologie.in.
-
+	Se poate schimba numarul de procese schimband topologia din fisierul topologie.in, urmand sa se apeleze
+	comanda mpirun cu numarul n de procese dorit.
+		
 	In urma acestor 2 comenzi se vor forma cele 5 rezultate ale imaginilor cu diferite filtre asupra lor
 ce le-am scris in imagini.in.
 
