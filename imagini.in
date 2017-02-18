@@ -1,0 +1,6 @@
+5
+smooth barbara.pgm barbara-sm.pgm
+smooth image1.pgm image1-sm.pgm
+blur casablanca.pgm casablanca-b.pgm
+sharpen casablanca.pgm casablanca-s.pgm
+mean-removal barbara.pgm barbara-m.pgm
