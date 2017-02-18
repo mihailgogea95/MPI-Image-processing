@@ -1,0 +1,104 @@
+
+											README
+	
+****************Algoritmi paraleli si distribuiti
+
+*********Prelucrarea de imagini folosind retele MPI
+
+Nume si Prenume : Gogea Mihail
+
+
+Pentru a se vedea rezultatul , urmati pasii:
+
+	I. make build
+	II. mpirun -np 12 ./filtru topologie.in imagini.in statistica.out
+
+	Numarul 12 deoarece sunt 12 procese in topologia din fisierul topologie.in.
+
+	In urma acestor 2 comenzi se vor forma cele 5 rezultate ale imaginilor cu diferite filtre asupra lor
+ce le-am scris in imagini.in.
+
+
+
+	Mentionez inca un lucru important , am presupus ca in fiecare imagine pe care se va aplica filtrul
+va respecta formatul exemplului care a fost dat in enuntul temei, dat totodata si formatul unei imagini .pgm 
+adica:
+	-pe prima linie tipul imagini ( ex. P2)
+	-(optional) urmatoarea linie  un comentariu care incepe cu simbolul '#'
+	-urmatoarea linie un intreg ce este numarul de coloane si un intreg ce este numarul de linii
+a matricei cu pixel(imaginea insasi)
+	-urmatoarea linie numarul maximGray(maximul unui pixel din imagine)
+	-urmand apoi sa fie scrise pe fiecare linie valoarea unui pixel in ordinea de parcurgere a unei matrici.
+			
+
+Descriere tema (sursa cod filter.c ) :
+	
+	
+	Pentru inceput am urmat algoritmul unda pentru aflarea arborelui de acoperire. Acest lucru fiind 
+asemanator cu algoritmul unda ce a fost facut la laboratorul 11. Pentru inceput fiecare proces va trebui
+sa citesca din fisierul topologie.in vecini sai. Acest algoritm implementat de mine respecta teoria unui
+algoritm de tip unda , iar in urma acestuia fiind aflat arborele de acoperire , iar buclele sunt eliminate
+totodata fiecare nod isi va elimina si copii care nu fac parte din arbore.
+	Urmeaza prelucrearea unei imagini care respecta de asemenea paradigma HEARTBEAT. Citesc din fisierul
+imagini.in numarul de imagini ce vor trebui sa fie prelucrate , iar apoi in functie de numarul acesta voi
+trimite din rank-ul principal la toti fii tipul de filtru cu tagul 5 , acest tag fiind pentru prelucrarea 
+imaginilor.	Din rank 0 citesc matricea , o bordez, aflu in functie de numarul de copii cat lini trebuie sa ii
+ofer fiecarui sa prelucreze cu ajutorul vectorului liniiCopil. Trimit pentru fiecare fiu pe langa tipul de filtru,
+numarul de maximGray, cate linii trebuie sa prelucreze si care este dimensiunea unei linii, urmand apoi sa trimit
+fragmentul ce trebuie sa il prelucreze cu tot cu linia superioara si linia inferioara. Apoi dupa ce am trimis la toti
+astept sa imi trimita si ei rezultatul pe care il voi concatena , iar imaginea finala o voi scrie in fisierul de scris.
+	Dupa ce am terminat cu toate imaginile voi de la rank 0 trimite un MPI_Send cu tagul de terminare tag_end ,iar apoi
+ de la toti fii astept vectorul cu liniile ce le-au prelucrat in total ca apoi sa le scriu in fisierul de statistica.out.
+
+	Acum pentru toate rank-urile cu rank != 0, adica toate nodurile mai putin radacina respectand paradigma HEARTBEAT,
+cu un while astept la infinit mesaje de la parinte , urmand sa ma opresc atunci cand primesc un mesaj cu tagul de end.
+Atunci cand primesc tagul de end stiu ca imaginile s-au terminat de prelucrat si urmeaza sa trimit pentru fiecare frunza 
+de care se leaga nodul respectiv vectorul cu numarul de linii ce au fost prelucrate in total. Altfel daca sunt la modificat
+imagini , voi primi pe langa tipul de filtru, si maximumGray, urmand apoi in caz de nu sunt frunza sa trimit si la copii
+aceste 2 detalii. Urmeaza primirea de numarul de coloane si numarul de lini de prelucrat, apoi fragmentul. Folosind acelasi
+procedeu ca si la rank 0, voi trimite in caz de nu sunt frunza la copii un numar egal de prelucrat, iar in caz de mai raman
+linii le voi asigna ultimului copil cum a fost precizat pe forum. Astept apoi sa primesc de la ei linile prelucrate , apoi sa trimit
+la parinte rezultatul primit. 
+	In caz de sunt frunza aplic filtrul pe fragmentul ce l-am primit si il trimit la parinte.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
