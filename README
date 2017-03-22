@@ -1,5 +1,5 @@
 
-											README
+							README
 	
 ****************Algoritmi paraleli si distribuiti
 
@@ -23,7 +23,7 @@ ce le-am scris in imagini.in.
 
 
 	Mentionez inca un lucru important , am presupus ca in fiecare imagine pe care se va aplica filtrul
-va respecta formatul exemplului care a fost dat in enuntul temei, dat totodata si formatul unei imagini .pgm 
+va respecta formatul unei imagini .pgm 
 adica:
 	-pe prima linie tipul imagini ( ex. P2)
 	-(optional) urmatoarea linie  un comentariu care incepe cu simbolul '#'
@@ -33,11 +33,11 @@ a matricei cu pixel(imaginea insasi)
 	-urmand apoi sa fie scrise pe fiecare linie valoarea unui pixel in ordinea de parcurgere a unei matrici.
 			
 
-Descriere tema (sursa cod filter.c ) :
+Descriere sursa cod filter.c :
 	
 	
 	Pentru inceput am urmat algoritmul unda pentru aflarea arborelui de acoperire. Acest lucru fiind 
-asemanator cu algoritmul unda ce a fost facut la laboratorul 11. Pentru inceput fiecare proces va trebui
+asemanator cu algoritmul unda . Pentru inceput fiecare proces va trebui
 sa citesca din fisierul topologie.in vecini sai. Acest algoritm implementat de mine respecta teoria unui
 algoritm de tip unda , iar in urma acestuia fiind aflat arborele de acoperire , iar buclele sunt eliminate
 totodata fiecare nod isi va elimina si copii care nu fac parte din arbore.
@@ -62,45 +62,4 @@ procedeu ca si la rank 0, voi trimite in caz de nu sunt frunza la copii un numar
 linii le voi asigna ultimului copil cum a fost precizat pe forum. Astept apoi sa primesc de la ei linile prelucrate , apoi sa trimit
 la parinte rezultatul primit. 
 	In caz de sunt frunza aplic filtrul pe fragmentul ce l-am primit si il trimit la parinte.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
-		
